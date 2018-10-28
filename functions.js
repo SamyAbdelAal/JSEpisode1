@@ -6,6 +6,11 @@
  */
 function greet(name) {
   // Your code here
+  if (name == null || name == "") {
+    console.log("Hello");
+  } else {
+    console.log(`Hello ${name}`);
+  }
 }
 
 /**
@@ -15,6 +20,8 @@ function greet(name) {
  */
 function isOdd(n) {
   // Your code here
+  if (n % 2) return true;
+  return false;
 }
 
 /**
@@ -30,6 +37,7 @@ function isOdd(n) {
  */
 function oddsSmallerThan(n) {
   // Your code here
+  return Math.floor(n / 2);
 }
 
 /**
@@ -44,6 +52,8 @@ function oddsSmallerThan(n) {
  */
 function squareOrDouble(n) {
   // Your code here
+  if (n % 2) return Math.pow(n, 2);
+  return n * 2;
 }
 
 /**
@@ -65,6 +75,29 @@ function squareOrDouble(n) {
  */
 function ageFromCivilID(civilID) {
   // Your code here
+
+  let C, YY, MM, DD;
+  if (civilID[0] == 1) {
+    C = 1800;
+  } else if (civilID[0] == 2) {
+    C = 1900;
+  } else if (civilID[0] == 3) {
+    C = 2000;
+  }
+  let date = new Date();
+  YY = C + parseInt(civilID[1] + civilID[2]);
+  MM = parseInt(civilID[3] + civilID[4]);
+  DD = parseInt(civilID[5] + civilID[6]);
+  let age = date.getFullYear() - YY;
+
+  if (MM > date.getMonth() + 1) {
+    age--;
+  } else if (MM == date.getMonth() + 1) {
+    if (DD > date.getDate()) {
+      age--;
+    }
+  }
+  return age;
 }
 
 /**
@@ -80,6 +113,8 @@ function ageFromCivilID(civilID) {
  */
 function canVoteInKuwait(civilID, isKuwaiti, isRoyal) {
   // Your code here
+
+  return ageFromCivilID(civilID) > 21 && isKuwaiti && !isRoyal;
 }
 
 module.exports = {
